@@ -1,21 +1,12 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@/lib/client';
 import { OAuth2Client } from 'google-auth-library';
 import jwt from 'jsonwebtoken';
-import { User } from '@/app/global/types';
 import { cookies } from 'next/headers';
 
 const client = new OAuth2Client();
 const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_SECURE_COOKIE = process.env.JWT_SECURE_COOKIE;
-
-type ResponseData = {
-  message?: string;
-  user?: User;
-  error?: string;
-  details?: unknown;
-};
 
 export async function POST(req: Request) {
   try {

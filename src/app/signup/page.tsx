@@ -1,10 +1,10 @@
 'use client'
 
 import { User } from '@/app/global/types';
-import { CredentialResponse, GoogleLogin, googleLogout, TokenResponse, useGoogleLogin } from '@react-oauth/google';
+import { CredentialResponse, GoogleLogin, googleLogout } from '@react-oauth/google';
 import axios from 'axios';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Signup() {
   const [user, setUser] = useState<User | null>(null);
