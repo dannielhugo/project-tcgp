@@ -46,6 +46,7 @@ const config: runtime.GetPrismaClientConfig = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {

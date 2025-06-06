@@ -17,9 +17,11 @@ type ResponseData = {
   details?: unknown;
 };
 
-export async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
+export async function POST(req: Request) {
   try {
-    const { credential, client_id } = req.body;
+    const body = await req.json();
+
+    const { credential, client_id } = body;
 
     const ticket = await client.verifyIdToken({
       idToken: credential,
@@ -52,7 +54,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Response
 
     // Generate a JWT token
     const token = jwt.sign(
-      { userId: user._id, email: user.email },
+      { userId: user.id, email: user.email },
       JWT_SECRET!,
       {
         expiresIn: '1h', // Adjust expiration time as needed
@@ -66,12 +68,16 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Response
       maxAge: 3600000, // 1 hour in milliseconds
     });
 
-    res
-      .status(200)
-      .json({ message: 'Authentication successful', user });
-
+    return new Response(JSON.stringify(user), {
+      status: 201,
+      headers: { 'Content-Type': 'application/json' },
+    });
   } catch (error: unknown) {
     console.error('Error verifying Google login:', error);
-    res.status(400).json({ error: 'Authentication failed', details: error });
+
+    return new Response(JSON.stringify({ error: 'Authentication failed' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
