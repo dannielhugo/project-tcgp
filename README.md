@@ -8,10 +8,6 @@ First, run the development server:
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -24,11 +20,40 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 Make a copy of env-default and rename it to .env.local
 
+## Set Up Database
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* Create a primsa dabatase and account
+
+```bash
+$ npx prisma init --db --output ../app/generated/prisma
+```
+
+* Go to https://console.prisma.io/, log in to your account.
+
+* Select "Connect to Database" and click on "Configure your database access"
+
+* Copy the generated URL string and put it on your .env file
+
+* Finally create the tables using:
+
+```bash
+$ npx prisma migrate dev --name init
+```
+
+## Open prisma studio (Visual Database)
+
+```bash
+$ npx prisma studio
+```
+
+## Using prisma
+
+https://www.prisma.io/docs/guides/nextjs#3-query-your-database-with-prisma-orm
 
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+Primsa + Vercel: https://www.prisma.io/docs/guides/nextjs#7-deploy-your-application-to-vercel-optional
