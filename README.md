@@ -25,7 +25,7 @@ Make a copy of env-default and rename it to .env.local
 * Create a primsa dabatase and account
 
 ```bash
-$ npx prisma init --db --output ../app/generated/prisma
+$ npx prisma init --db --output ../prisma/generated/prisma
 ```
 
 * Go to https://console.prisma.io/, log in to your account.
@@ -33,6 +33,12 @@ $ npx prisma init --db --output ../app/generated/prisma
 * Select "Connect to Database" and click on "Configure your database access"
 
 * Copy the generated URL string and put it on your .env file
+
+* If you already have a database created 
+
+```bash
+$ npx prisma init --output ../prisma/generated/prisma
+```
 
 * Finally create the tables using:
 

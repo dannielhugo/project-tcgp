@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../../app/generated/prisma';
+import { PrismaClient } from '../../../prisma/generated/prisma';
 import { withAccelerate } from '@prisma/extension-accelerate';
 
 const globalForPrisma = global as unknown as {
@@ -10,4 +10,6 @@ const prisma =
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
+
+console.log('Prisma Client initialized with Accelerate extension');
 export default prisma;
