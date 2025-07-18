@@ -1,11 +1,15 @@
-import Link from 'next/link';
+import CardList from '@/components/card/card-list';
+import MainFilter from '@/components/filter/main-filter';
+import { getCards } from '@/lib/card';
 
-export default function Home() {
+export default async function Home() {
+  const cards = await getCards();
+
   return (
     <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-      <Link href="/auth/login" className="flex items-center gap-2">
-        <span className="text-lg font-semibold">Login with Auth0</span>
-      </Link>
+      <MainFilter cards={cards}/>
+      <div className="flex flex-col gap-4"></div>
+      <CardList cards={cards} />
     </main>
   );
 }
